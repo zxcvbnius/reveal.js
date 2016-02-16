@@ -77,20 +77,35 @@
 						<h3>SEND ANYWHERE. DIRECT, PRIVATE, UNLIMITED FILE SIZE</h3>-->
 					</section>
 					<section>
-						<h3>App Server Side</h3>
+						<h3>App Server Side 1/2</h3>
+						<ul>
+							<li>User Managment</li>
+							<li>Device Managment</li>
+							<li>Push notification</li>
+							<li>...</li>
+						</ul>
+					</section>
+					<section>
+						<h3>App Server Side 2/2</h3>
 						<img data-src="img/flow.png" style="background:none; border:none;">
 					</section>
 					<section>
-						<h3>App Client Side</h3>
-						<p>
-							<img data-src="img/flow_client.png" style="background:none; border:none;">
-						</p>
-						<p class="fragment" style="font-size:18px;color:#787878">Fetching information from database</p>
-						<p class="fragment" style="font-size:18px;color:#129FF9">P2P tunnel connection &amp; http service</p>
+						<h3>App Client Side 1/2</h3>
+						<ul>
+							<li>Fetching information from database</li>
+							<li>P2P tunnel connection</li>
+							<li>http service</li>
+							<li>file live streaming</li>
+							<li>...</li>
+						</ul>
 					</section>
 					<section>
-						<img src="img/giphy.gif" style="background:none; border:none;">
-							<h2>... but it doesn't work out!</h2>
+						<h3>App Client Side 2/2</h3>
+						<img data-src="img/flow_client.png" style="background:none; border:none;">
+					</section>
+					<section>
+						<img src="http://i.giphy.com/90F8aUepslB84.gif" style="background:none; border:none;">
+							<h2>... but it doesn't work out!!</h2>
 					</section>
 				</section>
 
@@ -100,47 +115,115 @@
 						<h1>
 							<span class="fragment fade-in">API</span>
 							<span class="fragment fade-in">x</span>
-							<span class="fragment fade-in">B2C</span>
+							<span class="fragment">B2C</span>
+							<span class="fragment">=</span>
+							<span class="fragment" style="color:#ff2c2d">B2D</span>
 						</h1>
-					</section>
-					<section>
-						<h1 style="color:#347BB4">
-							B2D
-						</h1>
-						<p style="color:#787878">business to developer</p>
+						<p class="fragment" style="color:#787878">business to developer</p>
 					</section>
 				</section>
 
 				<!--Fifth Slide-->
-				<!--
-				<section>
-					<section>
-						<h2>
-							<a href="http://socket.io" target="_blank">Socket.io</a>
-						</h2>
-						<img width="600" height="400" src="img/socket_io.png">
-					</section>
-					<section>
-						<h2>
-							<a href="http://api2.diuit.com" target="_blank">API document</a>
-						</h2>
-						<img width="600" height="400" src="img/api_doc.png">
-					</section>
-					<section>
-					</section>
-				</section>
-				-->
 				<section>
 					<section>
 						<h2>
 							Chat API
 						</h2>
 						<p>
-							<span class="fragment fade-in" style="color:#FFFFFF"> WebSocket </span>
-							<span class="fragment fade-in" style="color:#787878"> bidirectional, full-duplex communication </span>
+							<span style="color:#FFFFFF"> WebSocket </span>
+							<span style="color:#787878"> bidirectional, full-duplex communication </span>
 						</p>
-						<p class="fragment fade-in"> <a href="http://socket.io" target="_blank">Socket.io</a> + Node.js </p>
-						<p class="fragment fade-in"> <img width="600" height="400" src="img/socket_io.png"> </p>
+						<p> <a href="http://socket.io" target="_blank">Socket.io</a> + Node.js </p>
+						<p> <img width="600" height="400" src="img/socket_io.png"> </p>
+					</section>
+					<section>
+						<h2>
+							Real-time Communication
+						</h2>
+						<ul>
+							<li class="fragment">Create Chat Room</li>
+							<li class="fragment">List Chat Room</li>
+							<li class="fragment">Leave Chat Rooom</li>
+							<li class="fragment">Kick User from the Chat Room</li>
+							<li class="fragment">Sending Customized Message</li>
+							<li class="fragment">Real-time receiving Message</li>
+							<li class="fragment">...</li>
+						</ul>
+					</section>
+					<section>
+						<h3>
+							LOGIN
+						</h3>
+						<pre><code class="hljs" data-trim contenteditable  style="width:925px">
+DiuitMessagingAPI.loginWithAuthToken(new DiuitCallback&lt;JSONObject&gt;()
+{
+    @Override
+    public void onSuccess(final JSONObject result)
+    {
+	    // get session
+	    // put your code
+    }
+    @Override
+    public void onFailure(final int code, final JSONObject result)
+    {
+        // put your code
+    }
+}, authToken);
+						</code></pre>
+					</section>
+					<section>
+						<h3>
+							LIST CHAT ROOM
+						</h3>
+						<pre><code class="hljs" data-trim contenteditable style="width:925px">
+DiuitMessagingAPI.listChats(new DiuitCallback&lt;ArrayList&lt;DiuitChat&gt;&gt;()
+    {
+        @Override
+        public void onSuccess(final ArrayList&lt;DiuitChat&gt; chats)
+        {
+            // if success, return chatArrayList
+        }
+
+        @Override
+        public void onFailure(final int code, final JSONObject resultObj)
+        {
+            // if failure, it will return error code and result
+        }
+    });
+						</code></pre>
+					</section>
+					<section>
+						<h3>
+							SEND MESSAGE
+						</h3>
+						<pre><code class="hljs" data-trim contenteditable style="width:925px">
+chat.sendText (String text, ...);
+chat.sendImage(Image image, ...);
+chat.sendFile (File file, ...);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Authenticating User</h2>
+							<ul>
+								<li>Obtaining Authentication Nonce</li>
+								<pre><code class="hljs" data-trim contenteditable style="width:925px">
+curl -X GET \
+-H "x-diuit-application-id: ${DIUIT_APP_ID}" \
+-H "x-diuit-api-key: ${DIUIT_APP_KEY}" \
+https://api.diuit.net/1/auth/nonce
+								</code></pre>
+								<li>Authenticate User On Your Account Server</li>
+								<li>Generate JWT Token</li>
+								<li>Login to Messaging Server</li>
+								<pre><code class="hljs" data-trim contenteditable style="width:925px">
+curl -X POST \
+-H "x-diuit-application-id: ${DIUIT_APP_ID}" \
+-H "x-diuit-api-key: ${DIUIT_APP_KEY}" \
+-H "Content-Type: application/json" \
+-d '{"authToken":${JWT_TOKEN}, "deviceId": ${DEVICE_ID}, "platform": ${PUSH_PLATFORM}, "pushToken": ${PUSH_TOKEN}' \
+https://api.diuit.net/1/auth/login
+								</code></pre>
+							</ul>
 					</section>
 					<section>
 						<h2>
@@ -150,8 +233,9 @@
 						<p><img width="600" height="400" src="img/api_doc.png"> </p>
 					</section>
 				</section>
-
 				<!--Sixth Slide-->
+
+				<!--Seventh Slide-->
 				<section>
 					<h2>
 						Thanks for your attention
