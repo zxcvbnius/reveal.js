@@ -53,11 +53,11 @@
 				<section>
 					<section>
 						<h2>b2c team</h2>
-						<p>在七樓同事的眼中...</p>
+						<p>同事A表示...</p>
 						<img width="600" height="400" data-src="img/b2c-office.jpg" alt="Down arrow">
 					</section>
 					<section>
-						<p>在九樓同事的眼中...</p>
+						<p>同事B表示...</p>
 						<img width="600" height="400" data-src="img/plank.jpg" alt="Down arrow">
 					</section>
 					<section>
@@ -77,51 +77,34 @@
 						<h3>SEND ANYWHERE. DIRECT, PRIVATE, UNLIMITED FILE SIZE</h3>-->
 					</section>
 					<section>
-						<h3>App Server Side 1/2</h3>
-						<ul>
-							<li>User Managment</li>
-							<li>Device Managment</li>
-							<li>Push notification</li>
-							<li>...</li>
-						</ul>
-					</section>
-					<section>
-						<h3>App Server Side 2/2</h3>
+						<h3>App Server Side</h3>
 						<img data-src="img/flow.png" style="background:none; border:none;">
 					</section>
 					<section>
-						<h3>App Client Side 1/2</h3>
-						<ul>
-							<li>Fetching information from database</li>
-							<li>P2P tunnel connection</li>
-							<li>http service</li>
-							<li>file live streaming</li>
-							<li>...</li>
-						</ul>
+						<h3>App Client Side</h3>
+						<p>
+							<span>
+								<img data-src="img/flow_client.png" style="background:none; border:none;">
+							</span>
+							<span>
+								<ul>
+									<li>Fetching information from database</li>
+									<li>P2P tunnel connection</li>
+									<li>http service</li>
+									<li>file live streaming</li>
+									<li>...</li>
+								</ul>
+							</span>
+						</p>
 					</section>
-					<section>
-						<h3>App Client Side 2/2</h3>
-						<img data-src="img/flow_client.png" style="background:none; border:none;">
-					</section>
-					<section>
-						<img src="http://i.giphy.com/90F8aUepslB84.gif" style="background:none; border:none;">
-							<h2>... but it doesn't work out!!</h2>
+					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<!--
+						<img src="http://i.giphy.com/90F8aUepslB84.gif" style="background:none; border:none;"> -->
+							<h1>... and api!!</h1>
 					</section>
 				</section>
 
 				<!-- Fourth Slide -->
-				<section>
-					<section>
-						<h1>
-							<span class="fragment fade-in">API</span>
-							<span class="fragment fade-in">x</span>
-							<span class="fragment">B2C</span>
-							<span class="fragment">=</span>
-							<span class="fragment" style="color:#ff2c2d">B2D</span>
-						</h1>
-						<p class="fragment" style="color:#787878">business to developer</p>
-					</section>
-				</section>
 
 				<!--Fifth Slide-->
 				<section>
@@ -140,15 +123,9 @@
 						<h2>
 							Real-time Communication
 						</h2>
-						<ul>
-							<li class="fragment">Create Chat Room</li>
-							<li class="fragment">List Chat Room</li>
-							<li class="fragment">Leave Chat Room</li>
-							<li class="fragment">Kick User from the Chat Room</li>
-							<li class="fragment">Sending Customized Message</li>
-							<li class="fragment">Real-time receiving Message</li>
-							<li class="fragment">...</li>
-						</ul>
+						<p>
+							<img src="img/icons.png" style="background:none; border:none;">
+						</p>
 					</section>
 					<section>
 						<h3>
@@ -205,6 +182,7 @@ chat.sendFile (File file, ...);
 					<section>
 						<h2>Authenticating User</h2>
 							<ul>
+								<li>Authenticate User On Your Account Server</li>
 								<li>Obtaining Authentication Nonce</li>
 								<pre><code class="hljs" data-trim contenteditable style="width:925px">
 curl -X GET \
@@ -212,7 +190,6 @@ curl -X GET \
 -H "x-diuit-api-key: ${DIUIT_APP_KEY}" \
 https://api.diuit.net/1/auth/nonce
 								</code></pre>
-								<li>Authenticate User On Your Account Server</li>
 								<li>Generate JWT Token</li>
 								<li>Login to Messaging Server</li>
 								<pre><code class="hljs" data-trim contenteditable style="width:925px">
@@ -231,6 +208,13 @@ https://api.diuit.net/1/auth/login
 						</h2>
 						<p><a href="http://api2.diuit.com" target="_blank">http://api.diuit.com</a></p>
 						<p><img width="600" height="400" src="img/api_doc.png"> </p>
+					</section>
+					<section>
+						<h2>
+							Sample Code
+						</h2>
+						<p><a href="https://github.com/diuitAPI" target="_blank">https://github.com/diuitAPI</a></p>
+						<p><img width="700" height="400" src="img/sample_code.png"> </p>
 					</section>
 				</section>
 				<!--Sixth Slide-->
