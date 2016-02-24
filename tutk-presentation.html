@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Diuit API</title>
+		<title>02.18 presentation</title>
 
 		<meta name="description" content="Mobile and web messaging, built for developers">
 		<meta name="author" content="Momo Lee">
@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -38,12 +38,11 @@
 
 		<div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
 				<!-- First Slide -->
 				<section>
-					<h1>Diuit API</h1>
+					<h1>B2C Chat API</h1>
 					<h3>Mobile and web messaging, built for developers</h3>
 					<p>
 						<small>Created by <a href="mailto:zxcvbnius@gmail.com">Momo Lee</a> / <a href="http://zxcvbnius.tw/wordpress">@zxcvbnius</a></small>
@@ -52,57 +51,59 @@
 
 				<!-- Second Slide -->
 				<section>
-					<h2>在開始介紹之前</h2>
-					<p>
-						before we start to explore diuit api
-					</p>
+					<section>
+						<h2>b2c team</h2>
+						<p>同事A表示...</p>
+						<img width="600" height="400" data-src="img/b2c-office.jpg" alt="Down arrow">
+					</section>
+					<section>
+						<p>同事B表示...</p>
+						<img width="600" height="400" data-src="img/plank.jpg" alt="Down arrow">
+					</section>
+					<section>
+						<p>那B2C team到底在做什麼...</p>
+					</section>
 				</section>
 
 				<!-- Third Slide -->
 				<section>
-					<h2>大家可以想像一下</h2>
-					<p>
-						you can imagine that
-					</p>
-				</section>
-
-				<!-- Fourth Slide -->
-				<section>
+					<section>
+						<p>
+							一切要從一年前的夏天開始說起...
+						</p>
+					</section>
 					<section data-background="img/slash.png">
+						<p style="color:#00000000;font-size:10px">NO LIMIT</p>
 					</section>
 					<section>
-						<h3>How to find each other</h3>
-						<img data-src="img/p2p_flow.png" style="background:none; border:none;">
+						<h3>App Server Side</h3>
+						<img data-src="img/flow.png" style="background:none; border:none;">
 					</section>
 					<section>
-						<h3>How to do file transferring without server</h3>
-						<h4>Building Http Service in your app</h4>
+						<h3>App Client Side</h3>
 						<p>
 							<span>
-								<img data-src="img/android_phone.png" style="background:none; border:none;">
+								<img data-src="img/flow_client.png" style="background:none; border:none;">
 							</span>
 							<span>
 								<ul>
-									<li>resuming transfer</li>
-									<li><pre><code class="javascript" data-trim contenteditable style="width:925px">
-curl -X GET \
--H "range: 1200-" \
-http://127.0.0.1:8080/v1/transfer
-									</code></pre></li>
-									<li>custom security</li>
+									<li>Fetching information from database</li>
+									<li>P2P tunnel connection</li>
+									<li>http service</li>
 									<li>file live streaming</li>
-									<li>a request is like a command</li>
+									<li>...</li>
 								</ul>
 							</span>
 						</p>
 					</section>
-					<section>
-						<h2>更多應用</h2>
-						<p>
-							more applications
-						</p>
+					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<!--
+						<img src="http://i.giphy.com/90F8aUepslB84.gif" style="background:none; border:none;"> -->
+							<h1>... and api!!</h1>
 					</section>
 				</section>
+
+				<!-- Fourth Slide -->
 
 				<!--Fifth Slide-->
 				<section>
@@ -129,29 +130,6 @@ http://127.0.0.1:8080/v1/transfer
 						<h1>
 							DEMO
 						</h1>
-					</section>
-					<section>
-						<h2>Authenticating User</h2>
-							<ul>
-								<li>Authenticate User On Your Account Server</li>
-								<li>Obtaining Authentication Nonce</li>
-								<pre><code class="hljs" data-trim contenteditable style="width:925px">
-curl -X GET \
--H "x-diuit-application-id: ${DIUIT_APP_ID}" \
--H "x-diuit-api-key: ${DIUIT_APP_KEY}" \
-https://api.diuit.net/1/auth/nonce
-								</code></pre>
-								<li>Generate JWT Token</li>
-								<li>Login to Messaging Server</li>
-								<pre><code class="hljs" data-trim contenteditable style="width:925px">
-curl -X POST \
--H "x-diuit-application-id: ${DIUIT_APP_ID}" \
--H "x-diuit-api-key: ${DIUIT_APP_KEY}" \
--H "Content-Type: application/json" \
--d '{"authToken":${JWT_TOKEN}, "deviceId": ${DEVICE_ID}, "platform": ${PUSH_PLATFORM}, "pushToken": ${PUSH_TOKEN}' \
-https://api.diuit.net/1/auth/login
-								</code></pre>
-							</ul>
 					</section>
 					<section>
 						<h3>
@@ -206,6 +184,29 @@ chat.sendFile (File file, ...);
 						</code></pre>
 					</section>
 					<section>
+						<h2>Authenticating User</h2>
+							<ul>
+								<li>Authenticate User On Your Account Server</li>
+								<li>Obtaining Authentication Nonce</li>
+								<pre><code class="hljs" data-trim contenteditable style="width:925px">
+curl -X GET \
+-H "x-diuit-application-id: ${DIUIT_APP_ID}" \
+-H "x-diuit-api-key: ${DIUIT_APP_KEY}" \
+https://api.diuit.net/1/auth/nonce
+								</code></pre>
+								<li>Generate JWT Token</li>
+								<li>Login to Messaging Server</li>
+								<pre><code class="hljs" data-trim contenteditable style="width:925px">
+curl -X POST \
+-H "x-diuit-application-id: ${DIUIT_APP_ID}" \
+-H "x-diuit-api-key: ${DIUIT_APP_KEY}" \
+-H "Content-Type: application/json" \
+-d '{"authToken":${JWT_TOKEN}, "deviceId": ${DEVICE_ID}, "platform": ${PUSH_PLATFORM}, "pushToken": ${PUSH_TOKEN}' \
+https://api.diuit.net/1/auth/login
+								</code></pre>
+							</ul>
+					</section>
+					<section>
 						<h2>
 							API Document
 						</h2>
@@ -220,73 +221,29 @@ chat.sendFile (File file, ...);
 						<p><img width="700" height="400" src="img/sample_code.png"> </p>
 					</section>
 				</section>
+				<!--Sixth Slide-->
 				<section>
-					<section>
+					<section data-background="img/coding.gif">
 						<h2>
-							Implement
+							Event
+						</h2>
+						<h3><a href="https://www.facebook.com/Diuit-364831183708819/?fref=ts" target="_blank">https://www.facebook.com/Diuit</a></h3>
+						<p><img src="img/event.png"></p>
+					</section>
+
+					<!--Seventh Slide-->
+					<section data-background="img/coding.gif">
+						<h2>
+							thanks for your attention
 						</h2>
 					</section>
+					<!--
 					<section>
 						<h2>
-							Register your account
-						</h2>
-						<p><a href="http://demo.diuit.net:3000/v1/users/register" target="_blank">http://demo.diuit.net:3000/v1/users/register</a></p>
-						<p><img width="800" height="400" src="img/demo_register_account.png" style="background:none; border:none;"> </p>
-					</section>
-					<section>
-						<h2>
-							Login
-						</h2>
-						<p><a href="http://demo.diuit.net:3000/v1/users/login" target="_blank">http://demo.diuit.net:3000/v1/users/login</a></p>
-						<p><img width="800" height="400" src="img/demo_login_account.png" style="background:none; border:none;"> </p>
-					</section>
-					<section>
-						<h2>
-							Create A New Android Project
-						</h2>
-						<p>
-							<a href="https://bintray.com/duolc/maven/com.duolc.diuitapi/view"  target="_blank">https://bintray.com/duolc/maven/com.duolc.diuitapi/view</a>
-						</p>
-						<p><img src="img/demo_android_import.png" style="background:none; border:none;"> </p>
-					</section>
-					<section>
-						<h2>
-							Login
-						</h2>
-						<p>
-						<p><img src="img/demo_android_login.png" style="background:none; border:none;"> </p>
-					</section>
-					<section>
-						<h2>
-							Create Chat Room
-						</h2>
-						<p>
-						<p><img src="img/demo_android_login.png" style="background:none; border:none;"> </p>
-					</section>
-					<section>
-						<h2>
-							Send Text Messaging
-						</h2>
-						<p>
-						<p><img src="img/demo_android_login.png" style="background:none; border:none;"> </p>
-					</section>
-					<section>
-						<h2>
-							Receiving Messaging
-						</h2>
-						<p>
-						<p><img src="img/demo_android_login.png" style="background:none; border:none;"> </p>
-					</section>
-					<section>
-						<h2>
-							Create New Activity for listing Historical Messages
+							Javascript
 						</h2>
 					</section>
-					<section>
-						<h2>
-							Listing Historical Messages
-						</h2>
-					</section>
+					-->
 				</section>
 			</div>
 
@@ -296,7 +253,6 @@ chat.sendFile (File file, ...);
 		<script src="js/reveal.js"></script>
 
 		<script>
-
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
