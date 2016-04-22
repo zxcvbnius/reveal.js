@@ -43,211 +43,35 @@
 
 				<!-- First Slide -->
 				<section>
-					<h1>Diuit API</h1>
-					<h3>Rich Messaging API Built for Every App</h3>
+					<h1 style="color:#CFD0DE;">Building a Raspberry Pi Bot</h1>
+					<h4>Chating with your raspberry pi</h4>
 					<p>
 						<small>Created by <a href="mailto:zxcvbnius@gmail.com">Momo Lee</a> / <a href="http://zxcvbnius.tw/wordpress">@zxcvbnius</a></small>
 					</p>
 				</section>
 
-				<!-- Second Slide -->
 				<section>
-					<h2>在開始介紹之前</h2>
+					<h1>
+						DEMO
+					</h1>
 					<p>
-						before we start to explore diuit api
-					</p>
-				</section>
-
-				<!-- Third Slide -->
-				<section>
-					<h2>大家可以想像一下</h2>
-					<p>
-						you can imagine that
+						taking photos, playing the video and motion detecting
 					</p>
 				</section>
 
 				<!-- Fourth Slide -->
 				<section>
-					<section data-background="img/slash.png">
-					</section>
-					<section>
-						<h3>How to find each other</h3>
-						<img data-src="img/p2p_flow.png" style="background:none; border:none;">
-					</section>
-					<section>
-						<h3>How to do file transferring without server</h3>
-						<h4>Building Http Service in your app</h4>
-						<p>
-							<span>
-								<img data-src="img/android_phone.png" style="background:none; border:none;">
-							</span>
-							<span>
-								<ul>
-									<li>resuming transfer</li>
-									<li><pre><code class="javascript" data-trim contenteditable style="width:925px">
-curl -X GET \
--H "range: 1200-" \
-http://127.0.0.1:8080/v1/transfer
-									</code></pre></li>
-									<li>custom security</li>
-									<li>file live streaming</li>
-								</ul>
-							</span>
-						</p>
-					</section>
-					<section>
-						<h2>DEMO</h2>
-						<p>
-							file live streaming
-						</p>
-					</section>
-					<section>
-						<h2>a request is like a command</h2>
-						<p>https://127.0.0.1/{dosomething}</p>
-					</section>
-					<section>
-						<h2>3-way handshake problem</h2>
-						<h4>
-							想一個情況，當你打skype給朋友
-						</h4>
-						<p align="center" style="font-size:20px">
-							我: Hi, 有沒有聽到聲音?[SYN]<br>
-							某: 有，那我呢?有沒有聽到聲音[SYN, ACK]<br>
-							我: 有唷～[ACK]
-						</p>
-					</section>
-				</section>
-
-				<!--Fifth Slide-->
-				<section>
-					<section>
-						<h2>
-							Chat API
-						</h2>
-						<p>
-							<span style="color:#FFFFFF"> WebSocket </span>
-							<span style="color:#787878"> bidirectional, full-duplex communication </span>
-						</p>
-						<p> <a href="http://socket.io" target="_blank">Socket.io</a> + Node.js </p>
-						<p> <img width="600" height="400" src="img/socket_io.png"> </p>
-					</section>
-					<section>
-						<h2>
-							Real-time Communication
-						</h2>
-						<p>
-							<img src="img/icons.png" style="background:none; border:none;">
-						</p>
-					</section>
-					<section>
-						<h1>
-							DEMO
-						</h1>
-						<p>
-							login , listing all chat room and sending text message
-						</p>
-					</section>
-					<section>
-						<h2>Authenticating User</h2>
-							<ul>
-								<li>Authenticate User On Your Account Server</li>
-								<li>Obtaining Authentication Nonce</li>
-								<pre><code class="hljs" data-trim contenteditable style="width:925px">
-curl -X GET \
--H "x-diuit-application-id: ${DIUIT_APP_ID}" \
--H "x-diuit-api-key: ${DIUIT_APP_KEY}" \
-https://api.diuit.net/1/auth/nonce
-								</code></pre>
-								<li>Generate JWT Token</li>
-								<li>Login to Messaging Server</li>
-								<pre><code class="hljs" data-trim contenteditable style="width:925px">
-curl -X POST \
--H "x-diuit-application-id: ${DIUIT_APP_ID}" \
--H "x-diuit-api-key: ${DIUIT_APP_KEY}" \
--H "Content-Type: application/json" \
--d '{"authToken":${JWT_TOKEN}, "deviceId": ${DEVICE_ID}, "platform": ${PUSH_PLATFORM}, "pushToken": ${PUSH_TOKEN}' \
-https://api.diuit.net/1/auth/login
-								</code></pre>
-							</ul>
-					</section>
-					<section>
-						<h3>
-							LOGIN
-						</h3>
-						<pre><code class="hljs" data-trim contenteditable  style="width:925px">
-DiuitMessagingAPI.loginWithAuthToken(new DiuitCallback&lt;JSONObject&gt;()
-{
-    @Override
-    public void onSuccess(final JSONObject result)
-    {
-	    // get session
-	    // put your code
-    }
-    @Override
-    public void onFailure(final int code, final JSONObject result)
-    {
-        // put your code
-    }
-}, authToken);
-						</code></pre>
-					</section>
-					<section>
-						<h3>
-							LIST CHAT ROOM
-						</h3>
-						<pre><code class="hljs" data-trim contenteditable style="width:925px">
-DiuitMessagingAPI.listChats(new DiuitCallback&lt;ArrayList&lt;DiuitChat&gt;&gt;()
-    {
-        @Override
-        public void onSuccess(final ArrayList&lt;DiuitChat&gt; chats)
-        {
-            // if success, return chatArrayList
-        }
-
-        @Override
-        public void onFailure(final int code, final JSONObject resultObj)
-        {
-            // if failure, it will return error code and result
-        }
-    });
-						</code></pre>
-					</section>
-					<section>
-						<h3>
-							SEND MESSAGE
-						</h3>
-						<pre><code class="hljs" data-trim contenteditable style="width:925px">
-chat.sendText (String text, ...);
-chat.sendImage(Image image, ...);
-chat.sendFile (File file, ...);
-						</code></pre>
-					</section>
-					<section>
-						<h2>
-							API Document
-						</h2>
-						<p><a href="http://api2.diuit.com" target="_blank">http://api.diuit.com</a></p>
-						<p><img width="600" height="400" src="img/api_doc.png"> </p>
-					</section>
-					<section>
-						<h2>
-							Sample Code
-						</h2>
-						<p><a href="https://github.com/diuitAPI" target="_blank">https://github.com/diuitAPI</a></p>
-						<p><img width="700" height="400" src="img/sample_code.png"> </p>
-					</section>
-				</section>
-				<section>
 					<section>
 						<h2>
 							實作
 						</h2>
-						<p>如何20分鐘建立一個聊天API</p>
+						<p>如何20分鐘建立一個聊天APP</p>
 					</section>
 					<section>
 						<h2>
 							今日目標
 						</h2>
+						<p>logging in, joining a chat and sending messages</p>
 						<p><a href="https://goo.gl/T1I5cI" target="_blank">https://goo.gl/T1I5cI</a></p>
 					</section>
 					<section>
@@ -300,10 +124,18 @@ chat.sendFile (File file, ...);
 							Remember, if you register a receiving in a activity or a obj, you have to unregister before leaving this activity or destroy this obj.
 						</p>
 					</section>
+					<section data-transition="slide" data-background="http://i.giphy.com/90F8aUepslB84.gif" data-background-transition="zoom">
+						<h2 style="color:#ffffff;">... wait!! </h2>
+					</section>
+				</section>
+
+				<!-- Fiveth Slide -->
+				<section>
 					<section>
-						<p style="color:#FFFFFF;font-size:55px">
-							http://developer.diuit.com/register
-						</p>
+						<h2>
+							Referenece
+						</h2>
+						<p><a href="https://goo.gl/T1I5cI" target="_blank">https://goo.gl/T1I5cI</a></p>
 					</section>
 				</section>
 				<section>
