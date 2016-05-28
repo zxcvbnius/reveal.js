@@ -68,7 +68,7 @@
 					<h3>
 						LOGIN
 					</h3>
-					<pre><code class="hljs" data-trim contenteditable  style="width:1000px">
+					<pre><code class="hljs" data-trim contenteditable  style="width:925px">
 DiuitMessagingAPI.loginWithAuthToken("PUT_YOUR_DEVICE_SESSION", new DiuitCallback() ... );
 					</code></pre>
 				</section>
@@ -77,7 +77,20 @@ DiuitMessagingAPI.loginWithAuthToken("PUT_YOUR_DEVICE_SESSION", new DiuitCallbac
 						LIST CHAT ROOM
 					</h3>
 					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-DiuitMessagingAPI.listChats(new DiuitCallback&lt;ArrayList&lt;DiuitChat&gt;&gt;() ... );
+DiuitMessagingAPI.listChats(new DiuitCallback&lt;ArrayList&lt;DiuitChat&gt;&gt;()
+{
+	@Override
+	public void onSuccess(final ArrayList&lt;DiuitChat&gt; chats)
+	{
+		// if success, return chatArrayList
+	}
+
+	@Override
+	public void onFailure(final int code, final JSONObject resultObj)
+	{
+		// if failure, it will return error code and result
+	}
+});
 					</code></pre>
 				</section>
 
@@ -111,39 +124,99 @@ DiuitChat.sendText(String text, new DiuitMessagingAPICallback>() ...)
 					<br>
 				</section>
 
-				<section>
-					<h2>UI Kit</h2>
-					<img data-src="img/new_website.png" style="background:none; border:none;">
+				<section data-transition="slide" data-background="http://i.giphy.com/90F8aUepslB84.gif" data-background-transition="zoom">
+					<h2 style="color:#ffffff;">... what!! </h2>
 				</section>
 
+
+
+				<section>
+					<section>
+						<h2>UI Kit</h2>
+						<img data-src="img/new_website.png" style="background:none; border:none;">
+					</section>
+				</section>
+
+
+				<!-- Fourth Slide -->
+				<section>
+					<section>
+						<h2>
+							實作
+						</h2>
+						<p>如何20分鐘跟Raspberry pi say Hi</p>
+						<p>如何20分鐘跟Raspberry pi say Hi</p>
+					</section>
+					<section>
+						<h2>
+							今日目標
+						</h2>
+						<p>logging in, joining a chat and sending messages</p>
+					</section>
+					<section data-transition="slide" data-background="http://i.giphy.com/90F8aUepslB84.gif" data-background-transition="zoom">
+						<h2 style="color:#ffffff;">... what!! </h2>
+					</section>
+					<section>
+						<h2>
+							Register your account
+						</h2>
+						<p><a href="http://demo.diuit.net/v1/users/register" target="_blank">http://demo.diuit.net/v1/users/register</a></p>
+						<p><img width="800" height="400" src="img/demo_register_account.png" style="background:none; border:none;"> </p>
+					</section>
+					<section>
+						<h2>
+							Login
+						</h2>
+						<p><a href="http://demo.diuit.net/v1/users/login" target="_blank">http://demo.diuit.net/v1/users/login</a></p>
+						<p><img width="800" height="400" src="img/demo_login_account.png" style="background:none; border:none;"> </p>
+					</section>
+					<section>
+						<h2>
+							Create A New Android Project
+						</h2>
+						<p>
+							<a href="https://bintray.com/duolc/maven/com.duolc.diuitapi/view"  target="_blank">https://bintray.com/duolc/maven/com.duolc.diuitapi/view</a>
+						</p>
+						<p><img src="img/demo_android_import.png" style="background:none; border:none;"> </p>
+					</section>
+					<section>
+						<h2>
+							Login
+						</h2>
+						<p><img src="img/demo_android_login.png" style="background:none; border:none;"> </p>
+					</section>
+					<section>
+						<h2>
+							Join Chat Room
+						</h2>
+						<p><img src="img/demo_android_join.png" style="background:none; border:none;"> </p>
+					</section>
+					<section>
+						<h2>
+							Send Text Messaging
+						</h2>
+						<p><img src="img/demo_android_sendmsg.png" style="background:none; border:none;"> </p>
+					</section>
+					<section>
+						<h2>
+							Receiving Messaging
+						</h2>
+						<p><img src="img/demo_android_receiving.png" style="background:none; border:none;"> </p>
+						<p algin="left" style="font-size:20px">
+							Remember, if you register a receiving in a activity or a obj, you have to unregister before leaving this activity or destroy this obj.
+						</p>
+					</section>
+				</section>
 
 				<!-- Fiveth Slide -->
 				<section>
-					<h3>
-						ChatsRecyclerView
-					</h3>
-					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-chatsRecyclerView.bindChats(DiuitChat chat),
-	new DiuitChatsRecyclerViewAdapter.OnItemClickListener() ...)
-					</code></pre>
+					<section>
+						<h2>
+							Referenece
+						</h2>
+						<p><a href="https://goo.gl/T1I5cI" target="_blank">https://goo.gl/T1I5cI</a></p>
+					</section>
 				</section>
-
-				<section>
-					<h3>
-						Create A Message View
-					</h3>
-					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-DiuitMessageFactory.bindMessage().image().setAttribute().load()
-DiuitMessageFactory.bindMessage().web().setAttribute().load()
-...
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>http://api.diuit.net</h2>
-					<img data-src="img/new_website.png" style="background:none; border:none;">
-				</section>
-
 				<section>
 					<h2>
 						Thanks for your attention
