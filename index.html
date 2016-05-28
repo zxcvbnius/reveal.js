@@ -69,7 +69,20 @@
 						LOGIN
 					</h3>
 					<pre><code class="hljs" data-trim contenteditable  style="width:1000px">
-DiuitMessagingAPI.loginWithAuthToken("PUT_YOUR_DEVICE_SESSION", new DiuitCallback() ... );
+DiuitMessagingAPI.loginWithAuthToken("PUT_YOUR_DEVICE_SESSION", new DiuitCallback&lt;JSONObject&gt;()
+{
+    @Override
+    public void onSuccess(final JSONObject result)
+    {
+	    // get session
+	    // put your code
+    }
+    @Override
+    public void onFailure(final int code, final JSONObject result)
+    {
+        // put your code
+    }
+});
 					</code></pre>
 				</section>
 				<section>
@@ -77,7 +90,20 @@ DiuitMessagingAPI.loginWithAuthToken("PUT_YOUR_DEVICE_SESSION", new DiuitCallbac
 						LIST CHAT ROOM
 					</h3>
 					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-DiuitMessagingAPI.listChats(new DiuitCallback&lt;ArrayList&lt;DiuitChat&gt;&gt;() ... );
+DiuitMessagingAPI.listChats(new DiuitCallback&lt;ArrayList&lt;DiuitChat&gt;&gt;()
+{
+	@Override
+	public void onSuccess(final ArrayList&lt;DiuitChat&gt; chats)
+	{
+		// if success, return chatArrayList
+	}
+
+	@Override
+	public void onFailure(final int code, final JSONObject resultObj)
+	{
+		// if failure, it will return error code and result
+	}
+});
 					</code></pre>
 				</section>
 
