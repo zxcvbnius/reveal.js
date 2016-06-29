@@ -1,13 +1,13 @@
-<!doctype html>
+sh<!doctype html>
 <html lang="en">
 
 	<head>
 		<meta charset="utf-8">
 
-		<title>Diuit API</title>
+		<title>reveal.js – The HTML Presentation Framework</title>
 
-		<meta name="description" content="Mobile and web messaging, built for developers">
-		<meta name="author" content="Momo Lee">
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -40,159 +40,166 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-
-				<!-- First Slide -->
 				<section>
-					<h1 style="color:#CFD0DE;">Diuit Messaging API</h1>
-					<h4>Rich Messaging API Built for Every App</h4>
+					<h1>Make Your Own Message Bot</h1>
+					<h3>打造專屬自己的chat bot</h3>
 					<p>
-						<small>Created by <a href="mailto:zxcvbnius@gmail.com">Momo Lee</a> / <a href="http://zxcvbnius.tw/wordpress">@duolC</a></small>
+						<small>Created by <a href="http://hakim.se">Momo Lee</a> / <a href="http://zxcvbnius.tw/">@zxcvbnius</a></small>
 					</p>
 				</section>
 
 				<section>
+					<h2>最近非常火紅的話題</h2>
+					<img data-src="../img/fb-messager.jpg" alt="fb-bot">
+				</section>
+
+				<section>
+					<section id="realtime-introduce">
+						<h2>如何建立即時通訊</h2>
+					</section>
 					<section>
-						<h2>Diuit Website</h2>
-						<img data-src="img/new_website.png" style="background:none; border:none;">
+						<h2>過去有一些方法...</h2>
+						<ul>
+							<li>Polling</li>
+							<li>Long polling</li>
+							<li>Streaming</li>
+						</ul>
+					</section>
+					<section data-transition="slide">
+						<h2>Websocket</h2>
+						<ul>
+							<li>雙向資料傳輸(full-duplex communication)</li>
+							<li>Data frame以<font color="#48d1cc">0x00</font>開頭<font color="#48d1cc">0xFF</font>結束</li>
+							<li>較少bandwidth</li>
+							<li>架構在HTTP/HTTPS之上</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Socket.io</h2>
+						<img data-src="../img/socket_io.png" alt="socket-io">
+					</section>
+					<section>
+						<h2>Pokemon</h2>
+						<img data-src="../img/weplay.png" alt="socket-io">
+					</section>
+					<section>
+						<h3>Server side(Node.js)</h3>
+						<pre><code class="hljs">
+var io = require('socket.io')(80);
+
+io.on('connection', function (socket) {
+  io.emit('this', { will: 'be received by everyone'});
+
+  socket.on('message', function (from, msg) {
+    console.log('Received a message by ', from, ' saying ', msg);
+  });
+
+  socket.on('disconnect', function () {
+    io.emit('user disconnected');
+  });
+});
+						</code></pre>
+					</section>
+					<section>
+						<h3>Client side(Android)</h3>
+						<pre><code class="hljs">
+IO.Options options = new IO.Options();
+options.reconnection = true;
+options.forceNew = false;
+Socket io = IO.socket("http://yoururl", options);
+
+io.on("connect", new Emitter.Listener() {
+    @Override
+    public void call(Object... args) {
+	JSONObject msgObj = new JSONObject();
+	msgObj.put('hello i am momo!');
+	io.emit("message", msgObj, new Ack() {
+          @Override
+          public void call(Object... args) {...}
+    });
+}
+});
+						</code></pre>
 					</section>
 				</section>
 
 				<section>
+					<section data-transition="slide" data-background-transition="zoom">
+						<h2>Demo</h2>
+						<h3>Raspberry pi bot</h3>
+						<ul>
+							<li>Take a photo</li>
+							<li>Play the video</li>
+							<li>Motion detection</li>
+						</ul>
+					</section>
+					<section data-background-color="#000000">
+						<video width="500" height="700" controls>
+						  <source src="../video/demo-pot.mp4" type="video/mp4">
+						</video>
+					</section>
+					<section>
+						<p>
+							不過我只是想看到影片卻要打這麼多字啊...
+						</p>
+					</section>
+					<section>
+						<p>
+							已Telegram為例
+						</p>
+						<img width="320" src="../img/telegram-skyscanner.jpg">
+						<img width="320" src="../img/telegram-youtube.jpg">
+					</section>
+					<section>
+						<p>
+							那...bot離我們實際運用還很遠嗎
+						</p>
+					</section>
+					<section>
+						<h4>Daily Standup</h4>
+						<img src="../img/daily-standup.png">
+					</section>
+					<section>
+						<section>
+							<h2>Bots won't replace apps. Better apps will replace apps.</h2>
+							<img src="../img/blog-bot.png">
+						</section>
+					</section>
+				</section>
+
+
+				<section>
+					<section>
+						<h2>Diuit Chating API</h2>
+						<img data-src="img/new_website.png" style="background:none; border:none;">
+					</section>
 					<section>
 						<h2>API Document</h2>
 						<img data-src="img/new_document.png" style="background:none; border:none;">
 					</section>
-				</section>
-
-				<section>
-					<h3>
-						installation
-					</h3>
-					<pre><code class="hljs" data-trim contenteditable  style="width:1000px">
-repositories {
-    maven {
-        url 'https://dl.bintray.com/duolc/maven'
-    }
-}
-dependencies {
-	....
-    compile 'com.duolc.diuitapi:message:1.1.4'
-}
-					</code></pre>
-				</section>
-
-				<section>
-					<h3>
-						LOGIN
-					</h3>
-					<pre><code class="hljs" data-trim contenteditable  style="width:1000px">
-DiuitMessagingAPI.loginWithAuthToken("PUT_YOUR_DEVICE_SESSION", new DiuitCallback&lt;JSONObject&gt;()
-{
-    @Override
-    public void onSuccess(final JSONObject result)
-    {
-	    // get session
-	    // put your code
-    }
-    @Override
-    public void onFailure(final int code, final JSONObject result)
-    {
-        // put your code
-    }
-});
-					</code></pre>
-				</section>
-				<section>
-					<h3>
-						LIST CHAT ROOM
-					</h3>
-					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-DiuitMessagingAPI.listChats(new DiuitCallback&lt;ArrayList&lt;DiuitChat&gt;&gt;()
-{
-	@Override
-	public void onSuccess(final ArrayList&lt;DiuitChat&gt; chats)
-	{
-		// if success, return chatArrayList
-	}
-
-	@Override
-	public void onFailure(final int code, final JSONObject resultObj)
-	{
-		// if failure, it will return error code and result
-	}
-});
-					</code></pre>
-				</section>
-
-				<section>
-					<h3>
-						Register Push Notification
-					</h3>
-					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-DiuitMessagingAPI.registerPushNotificationService("PUT_YOUR_PROJECT_ID")
-					</code></pre>
-					<br>
-					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-<service android:name="com.duolc.DiuitPushBroadcastService"
-		android:exported="false" \>
-	<intent-filter>
-		<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-	</intent-filter>
-</service>
-					</code></pre>
-				</section>
-
-				<section>
-					<h3>
-						Other functions
-					</h3>
-					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-DiuitMessagingAPI.listChats(new DiuitMessagingAPICallback>() ...)
-DiuitChat.sendText(String text, new DiuitMessagingAPICallback>() ...)
-....
-					</code></pre>
-					<br>
-				</section>
-
-				<section>
-					<h2>UI Kit</h2>
-					<img data-src="img/new_website.png" style="background:none; border:none;">
-				</section>
-
-
-				<!-- Fiveth Slide -->
-				<section>
-					<h3>
-						ChatsRecyclerView
-					</h3>
-					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-chatsRecyclerView.bindChats(DiuitChat chat),
-	new DiuitChatsRecyclerViewAdapter.OnItemClickListener() ...)
-					</code></pre>
-					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-&lt;com.duolc.diuitapi.messageui.page.DiuitChatsRecyclerView
-        android:id="@+id/diuitChatsView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:diuTitleTextColor="#000000"
-        app:diuTitleText="Chat List" /&gt;
-					</code></pre>
-				</section>
-
-				<section>
-					<h3>
-						Create A Message View
-					</h3>
-					<pre><code class="hljs" data-trim contenteditable style="width:925px">
-DiuitMessageFactory.bindMessage().image().setAttribute().load()
-DiuitMessageFactory.bindMessage().web().setAttribute().load()
-...
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>api.diuit.com</h2>
-					<img data-src="img/demo_final.png" style="background:none; border:none;">
+					<section>
+						<h3>
+							UI Kit
+						</h3>
+						<img width="320" src="../img/DiuitChatsRecyclerView.png">
+						<img width="320" src="../img/DiuitMessagesRecyclerView.png">
+					</section>
+					<section>
+						<h3>
+							If we want to create a message view
+						</h3>
+						<img width="800" src="../img/ui-kit-document.png">
+					</section>
+					<section data-transition="slide" data-background="#033664" data-background-transition="zoom">
+						<h2>
+							http://api.diuit.com/
+						</h2>
+						<p>
+							#justforu
+						</p>
+					</section>
 				</section>
 
 				<section>
@@ -200,6 +207,7 @@ DiuitMessageFactory.bindMessage().web().setAttribute().load()
 						Thanks for your attention
 					</h2>
 				</section>
+
 			</div>
 
 		</div>
